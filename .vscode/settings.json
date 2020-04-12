@@ -1,7 +1,9 @@
 {
 	"files.exclude": {
-		"C:/Users/loren/UdemyUnrealC++Workspace/BattleTank/BattleTank/.vscode": true,
-		"C:/Users/loren/UdemyUnrealC++Workspace/BattleTank/BattleTank/Content": true,
-		"C:/Users/loren/UdemyUnrealC++Workspace/BattleTank/BattleTank/Intermediate": true
+		"C:/Users/loren/UdemyUnrealC++Workspace/BattleTank/.git": true,
+		"C:/Users/loren/UdemyUnrealC++Workspace/BattleTank/.vscode": true,
+		"C:/Users/loren/UdemyUnrealC++Workspace/BattleTank/Content": true,
+		"C:/Users/loren/UdemyUnrealC++Workspace/BattleTank/Intermediate": true,
+		"C:/Users/loren/UdemyUnrealC++Workspace/BattleTank/Saved": true
 	}
 }
