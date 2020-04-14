@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Kismet/GameplayStatics.h"
 #include "TankAimingComponent.h"
 
 // Sets default values for this component's properties
@@ -12,32 +13,42 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-
-// Called when the game starts
-void UTankAimingComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
-
-
-// Called every frame
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
-
 void UTankAimingComponent::AimAt(FVector& HitLocation, float LaunchSpeed){
+
+	if(!Barrel){
+		UE_LOG(LogTemp, Error, TEXT("Barrel not found."));
+		return;
+	}
+
 	auto BarrelLocation = Barrel->GetComponentLocation();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from barrel at %s."), *GetOwner()->GetName(), *HitLocation.ToString(), *BarrelLocation.ToString());
-	UE_LOG(LogTemp, Warning, TEXT("Speed: %f"), LaunchSpeed);
+
+	// Find projectile suggested velocity
+	FVector LaunchVelocity;
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+
+	bool bSuggested = UGameplayStatics::SuggestProjectileVelocity(this, 
+												LaunchVelocity, 
+												StartLocation, 
+												HitLocation, 
+												LaunchSpeed, 
+												ESuggestProjVelocityTraceOption::DoNotTrace);
+	if(bSuggested){
+		auto AimDirection = LaunchVelocity.GetSafeNormal();
+		UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from barrel at %s."), *GetOwner()->GetName(), *AimDirection.ToString(), *BarrelLocation.ToString());
+		MoveBarrel(AimDirection);
+	}
+
 }
 
 void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet){
 	Barrel = BarrelToSet;
+}
+
+void UTankAimingComponent::MoveBarrel(FVector AimDirection){
+	// Get the difference in the direction, so adjust the physic barrel
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimDirectionRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimDirectionRotator - BarrelRotator;
+	UE_LOG(LogTemp, Warning, TEXT("Delta rotator is %s."), *DeltaRotator.ToString());
 }
 
