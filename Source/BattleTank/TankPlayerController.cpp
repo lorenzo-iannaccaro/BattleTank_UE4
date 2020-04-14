@@ -36,7 +36,7 @@ void ATankPlayerController::AimTowardsReticle(){
     }
     FVector HitLocation;
     if(GetSightRayHitLocation(HitLocation)){
-        UE_LOG(LogTemp, Warning, TEXT("Hit something at location %s"), *HitLocation.ToString());
+        //UE_LOG(LogTemp, Warning, TEXT("Hit something at location %s"), *HitLocation.ToString());
     }
 
 }
@@ -59,6 +59,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const{
         // Linetrace and see if something is hit
         if(GetLookVectorHitLocation(WorldDirection, HitLocation)){
             //UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
+            GetControlledTank()->AimAt(HitLocation);
         }
     }
     
