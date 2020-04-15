@@ -32,8 +32,12 @@ void UTankAimingComponent::AimAt(FVector& HitLocation, float LaunchSpeed){
 												StartLocation, 
 												HitLocation, 
 												LaunchSpeed, 
+												false, 
+												0, 
+												0, 
 												ESuggestProjVelocityTraceOption::DoNotTrace);
 	if(bSuggested){
+		UE_LOG(LogTemp, Display, TEXT("Launch solution found"));
 		auto AimDirection = LaunchVelocity.GetSafeNormal();
 		UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from barrel at %s."), *GetOwner()->GetName(), *AimDirection.ToString(), *BarrelLocation.ToString());
 		MoveBarrel(AimDirection);
