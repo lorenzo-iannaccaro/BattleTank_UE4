@@ -18,7 +18,7 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000.f;	// 1000 m/s
+	float LaunchSpeed = 5000.f;	// 1000 m/s
 
 	// Sets default values for this pawn's properties
 	ATank();
