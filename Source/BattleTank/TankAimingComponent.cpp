@@ -49,6 +49,10 @@ void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet){
 	Barrel = BarrelToSet;
 }
 
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet){
+	Turret = TurretToSet;
+}
+
 void UTankAimingComponent::MoveBarrel(FVector AimDirection){
 	// Get the difference in the direction
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
