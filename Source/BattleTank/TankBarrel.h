@@ -20,7 +20,7 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float MaxRelativeAngularSpeed = 20.f;
+	float MaxDegreesPerSecond = 5.f;
 	UPROPERTY(EditAnywhere)
 	float MaxElevation = 40.f;
 	UPROPERTY(EditAnywhere)
