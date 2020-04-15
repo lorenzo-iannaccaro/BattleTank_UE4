@@ -17,15 +17,21 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 5000.f;	// 1000 m/s
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// Sets default values for this pawn's properties
 	ATank();
 	void AimAt(FVector& HitLocation);
 
-	UFUNCTION(BlueprintCallable)
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 5000.f;	// 1000 m/s
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+	UClass* ProjectileBlueprint;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
@@ -38,10 +44,8 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
-
-public:	
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+private:
+	// Local barrel reference for projectile spawning
+	UTankBarrel* Barrel = nullptr;
 
 };
