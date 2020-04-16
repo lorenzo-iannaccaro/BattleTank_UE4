@@ -8,8 +8,9 @@
 
 // forward declarations
 class UTankBarrel;
-class UTankAimingComponent;
 class UTankTurret;
+class UTankAimingComponent;
+class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -47,10 +48,14 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	// reference to movement component
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
+
 private:
 	// Local barrel reference for projectile spawning
 	UTankBarrel* Barrel = nullptr;
-
 
 	double LastFireTime = 0;
 
