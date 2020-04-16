@@ -18,11 +18,11 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 	private:
-		UPROPERTY(EditAnywhere)
+		UPROPERTY(EditDefaultsOnly)
 		float ReticleXLocation = 0.5f;
-		UPROPERTY(EditAnywhere)
+		UPROPERTY(EditDefaultsOnly)
 		float ReticleYLocation = 0.35f;
-		UPROPERTY(EditAnywhere)
+		UPROPERTY(EditDefaultsOnly)
 		float LineTraceRange = 1000000.0f;
 
 	public:

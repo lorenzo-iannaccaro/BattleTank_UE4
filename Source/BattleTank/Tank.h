@@ -24,13 +24,16 @@ public:
 	ATank();
 	void AimAt(FVector& HitLocation);
 
-	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 5000.f;	// 1000 m/s
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float LaunchSpeed = 5000.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	UClass* ProjectileBlueprint;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
@@ -48,7 +51,7 @@ private:
 	// Local barrel reference for projectile spawning
 	UTankBarrel* Barrel = nullptr;
 
-	float ReloadTimeInSeconds = 3;
+
 	double LastFireTime = 0;
 
 };
