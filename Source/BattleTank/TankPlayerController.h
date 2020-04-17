@@ -25,11 +25,13 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 		UPROPERTY(EditDefaultsOnly)
 		float LineTraceRange = 1000000.0f;
 
+	protected:
+		UFUNCTION(BlueprintCallable)
+		ATank* GetControlledTank() const;
+
 	public:
 		virtual void BeginPlay() override;
 		virtual void Tick(float DeltaTime) override;
-
-		ATank* GetControlledTank() const;
 		
 		void AimTowardsReticle();
 		bool GetSightRayHitLocation(FVector&) const;
