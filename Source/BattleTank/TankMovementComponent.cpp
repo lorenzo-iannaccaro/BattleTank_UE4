@@ -27,8 +27,10 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
     auto AIActualForwardVector = GetOwner()->GetActorForwardVector().GetSafeNormal();
     auto AIIntentionForwardVector = MoveVelocity.GetSafeNormal();
 
-    auto AIThrow = FVector::DotProduct(AIActualForwardVector, AIIntentionForwardVector);
+    float AIForwardThrow = FVector::DotProduct(AIActualForwardVector, AIIntentionForwardVector);
+    FVector AITurnThrow = FVector::CrossProduct(AIActualForwardVector, AIIntentionForwardVector);
 
-    IntendMoveForward(AIThrow);
+    IntendMoveForward(AIForwardThrow);
+    IntendTurnClockwise(AITurnThrow.Z);
 
 }
