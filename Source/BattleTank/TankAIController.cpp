@@ -26,5 +26,8 @@ void ATankAIController::Tick(float DeltaTime)
         AITank->Fire();
     }
 
+    // AI tank move to the game player's tank
+    MoveToActor(PlayerTank, DistanceFromPlayerTank);
+
 }
 

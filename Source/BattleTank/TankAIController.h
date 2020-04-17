@@ -21,5 +21,5 @@ class BATTLETANK_API ATankAIController : public AAIController
 		virtual void Tick(float DeltaTime) override;
 
 	private:
-		
+		float DistanceFromPlayerTank = 500.f;
 };
