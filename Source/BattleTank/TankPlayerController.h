@@ -8,9 +8,10 @@
 #include "TankPlayerController.generated.h"
 
 class ATank;
+class UTankAimingComponent;
 
 /**
- * 
+ * Component used for the tank aiming system
  */
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
@@ -28,6 +29,9 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	protected:
 		UFUNCTION(BlueprintCallable)
 		ATank* GetControlledTank() const;
+
+		UFUNCTION(BlueprintImplementableEvent)
+		void FindAimingComponent(UTankAimingComponent* AimingComponentReference);
 
 	public:
 		virtual void BeginPlay() override;
