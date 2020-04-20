@@ -17,7 +17,7 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::AimAt(FVector& HitLocation, float LaunchSpeed){
 
-	if(!Barrel){
+	if(!ensure(Barrel)){
 		UE_LOG(LogTemp, Error, TEXT("Barrel not found."));
 		return;
 	}
@@ -47,10 +47,10 @@ void UTankAimingComponent::AimAt(FVector& HitLocation, float LaunchSpeed){
 }
 
 void UTankAimingComponent::InitialiseTurretAndBarrel(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet){
-	if(!TurretToSet || !BarrelToSet){
+	if(!ensure(TurretToSet && BarrelToSet)){
 		return;
 	}
-	
+
 	Turret = TurretToSet;
 	Barrel = BarrelToSet;
 }

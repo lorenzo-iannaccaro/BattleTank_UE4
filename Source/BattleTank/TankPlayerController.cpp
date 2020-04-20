@@ -8,7 +8,7 @@ void ATankPlayerController::BeginPlay(){
     Super::BeginPlay();
 
     auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-    if(!AimingComponent){
+    if(!ensure(AimingComponent)){
         UE_LOG(LogTemp, Error, TEXT("Aiming component not found"));
         return; 
     }
@@ -38,7 +38,7 @@ ATank* ATankPlayerController::GetControlledTank() const{
 }
 
 void ATankPlayerController::AimTowardsReticle(){
-    if(!GetControlledTank()){
+    if(!ensure(GetControlledTank())){
         UE_LOG(LogTemp, Error, TEXT("No player tank pawn detected."));
         return;
     }
