@@ -7,6 +7,14 @@
 #include "Components/StaticMeshComponent.h"
 #include "TankAimingComponent.generated.h"
 
+// Firing states for the reticle color
+UENUM()
+enum class EFiringState : uint8{
+	Locked, 
+	Reloading, 
+	Aiming
+};
+
 // forward declarations
 class UTankBarrel;
 class UTankTurret;
@@ -20,10 +28,15 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	void SetTurretReference(UTankTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void InitialiseTurretAndBarrel(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet);
+
+	/* void SetBarrelReference(UTankBarrel* BarrelToSet);
+	void SetTurretReference(UTankTurret* TurretToSet); */
 
 protected:
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+	EFiringState FiringState = EFiringState::Reloading;
 
 public:	
 	void AimAt(FVector& HitLocation, float LaunchSpeed);
