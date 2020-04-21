@@ -26,7 +26,7 @@ void ATankAIController::Tick(float DeltaTime)
     AimingComponent->AimAt(PlayerHitLocation);
 
     // TODO fix AI firing
-    //AITank->Fire();
+    AimingComponent->Fire();
 
     // AI tank move to the game player's tank
     MoveToActor(PlayerTank, DistanceFromPlayerTank);

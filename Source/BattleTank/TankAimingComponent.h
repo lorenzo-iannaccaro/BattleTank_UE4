@@ -39,6 +39,17 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 5000.f;
 
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UClass* ProjectileBlueprint;
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
+
 	void AimAt(FVector& HitLocation);
 
 private:
