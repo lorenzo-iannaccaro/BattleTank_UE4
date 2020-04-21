@@ -53,8 +53,15 @@ public:
 	void AimAt(FVector& HitLocation);
 
 private:
+	FVector AimDirection = FVector(0.0);
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 	void MoveTurretAndBarrel(FVector AimDirection);
+
+	bool IsBarrelMoving();
+
+	virtual void BeginPlay() override;
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
 };
