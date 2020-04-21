@@ -39,7 +39,10 @@ void ATankPlayerController::AimTowardsReticle(){
     }
     FVector HitLocation;
     if(GetSightRayHitLocation(HitLocation)){
-        //UE_LOG(LogTemp, Warning, TEXT("Hit something at location %s"), *HitLocation.ToString());
+        auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+        if(!ensure(AimingComponent)){ return; }
+        
+        AimingComponent->AimAt(HitLocation);
     }
 
 }
@@ -63,14 +66,11 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const{
         if(GetLookVectorHitLocation(WorldDirection, HitLocation)){
             //UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
             //GetPawn()->AimAt(HitLocation);
-            auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
-            if(!ensure(AimingComponent)){ return false; }
-            AimingComponent->AimAt(HitLocation);
+            return true;
         }
     }
     
-
-    return true;
+    return false;
 }
 
 bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLoc) const{
