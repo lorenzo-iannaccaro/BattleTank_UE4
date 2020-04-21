@@ -1,13 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
 void ATankPlayerController::BeginPlay(){
     Super::BeginPlay();
 
-    auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+    auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
     if(!ensure(AimingComponent)){
         UE_LOG(LogTemp, Error, TEXT("Aiming component not found"));
         return; 
@@ -16,7 +15,7 @@ void ATankPlayerController::BeginPlay(){
 
     /* UE_LOG(LogTemp, Warning, TEXT("Inside begin play of TankPlayerController"));
 
-    auto ControlledTank = GetControlledTank();
+    auto ControlledTank = GetPawn();
     if(!ControlledTank){
         UE_LOG(LogTemp, Error, TEXT("No tank possessed by player."));
         return;
@@ -33,12 +32,8 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 }
 
-ATank* ATankPlayerController::GetControlledTank() const{
-    return Cast<ATank> (GetPawn());
-}
-
 void ATankPlayerController::AimTowardsReticle(){
-    if(!ensure(GetControlledTank())){
+    if(!ensure(GetPawn())){
         UE_LOG(LogTemp, Error, TEXT("No player tank pawn detected."));
         return;
     }
@@ -67,7 +62,10 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const{
         // Linetrace and see if something is hit
         if(GetLookVectorHitLocation(WorldDirection, HitLocation)){
             //UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
-            GetControlledTank()->AimAt(HitLocation);
+            //GetPawn()->AimAt(HitLocation);
+            auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+            if(!ensure(AimingComponent)){ return false; }
+            AimingComponent->AimAt(HitLocation);
         }
     }
     

@@ -15,7 +15,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::AimAt(FVector& HitLocation, float LaunchSpeed){
+void UTankAimingComponent::AimAt(FVector& HitLocation){
 
 	if(!ensure(Barrel)){
 		UE_LOG(LogTemp, Error, TEXT("Barrel not found."));
