@@ -56,6 +56,10 @@ void UTankAimingComponent::InitialiseTurretAndBarrel(UTankTurret* TurretToSet, U
 }
 
 void UTankAimingComponent::MoveTurretAndBarrel(FVector AimDirection){
+	if(!ensure(Turret && Barrel)){
+		return;
+	}
+
 	// Get the difference in the direction
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimDirectionRotator = AimDirection.Rotation();

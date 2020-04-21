@@ -18,7 +18,7 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// Sets default values for this pawn's properties
 	ATank();
