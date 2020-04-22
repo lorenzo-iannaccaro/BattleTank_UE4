@@ -13,7 +13,6 @@ UTankAimingComponent::UTankAimingComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
 }
 
 void UTankAimingComponent::BeginPlay(){
@@ -80,10 +79,13 @@ void UTankAimingComponent::MoveTurretAndBarrel(FVector AimDirection){
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimDirectionRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimDirectionRotator - BarrelRotator;
-	//UE_LOG(LogTemp, Warning, TEXT("Delta rotator is %s."), *DeltaRotator.ToString());
 
 	// Adjust turret and barrel to current aim location in 3D space
-	Turret->Rotate(DeltaRotator.Yaw);
+	if(FMath::Abs(DeltaRotator.Yaw) < 180.0){
+		Turret->Rotate(DeltaRotator.Yaw);
+	}else{
+		Turret->Rotate(-DeltaRotator.Yaw);
+	}
 	Barrel->Elevate(DeltaRotator.Pitch);
 }
 

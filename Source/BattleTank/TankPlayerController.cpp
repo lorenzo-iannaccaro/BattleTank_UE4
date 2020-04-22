@@ -13,15 +13,6 @@ void ATankPlayerController::BeginPlay(){
     }
     FindAimingComponent(AimingComponent);
 
-    /* UE_LOG(LogTemp, Warning, TEXT("Inside begin play of TankPlayerController"));
-
-    auto ControlledTank = GetPawn();
-    if(!ControlledTank){
-        UE_LOG(LogTemp, Error, TEXT("No tank possessed by player."));
-        return;
-    }
-    UE_LOG(LogTemp, Warning, TEXT("Possessed tank is: %s"), *ControlledTank->GetName()); */
-
 }
 
 // Called every frame
@@ -60,16 +51,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const{
     // Deproject to world coordinates
     FVector WorldLocation, WorldDirection;
     if(DeprojectScreenPositionToWorld(ReticleLocation.X, ReticleLocation.Y, WorldLocation, WorldDirection)){
-        //UE_LOG(LogTemp, Warning, TEXT("World direction: %s"), *WorldDirection.ToString());
-
         // Linetrace and see if something is hit
         if(GetLookVectorHitLocation(WorldDirection, HitLocation)){
-            //UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
-            //GetPawn()->AimAt(HitLocation);
             return true;
         }
     }
-    
+
     return false;
 }
 
