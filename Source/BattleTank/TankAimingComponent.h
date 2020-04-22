@@ -38,7 +38,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Reloading;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Firing")
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	int RoundsLeft = 10;
 
 public:	
@@ -53,6 +53,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	UClass* ProjectileBlueprint;
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
 	int GetRoundsLeft() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
