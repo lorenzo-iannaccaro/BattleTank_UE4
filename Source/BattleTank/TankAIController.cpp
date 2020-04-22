@@ -26,7 +26,9 @@ void ATankAIController::Tick(float DeltaTime)
     AimingComponent->AimAt(PlayerHitLocation);
 
     // AI firing
-    AimingComponent->Fire();
+    if(AimingComponent->GetFiringState() == EFiringState::Locked){
+        AimingComponent->Fire();
+    }
 
     // AI tank move to the game player's tank
     MoveToActor(PlayerTank, DistanceFromPlayerTank);
