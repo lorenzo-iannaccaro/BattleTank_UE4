@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "PhysicsEngine/RadialForceComponent.h"
 #include "Projectile.generated.h"
 
 class UProjectileMovementComponent;
@@ -23,12 +24,17 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UStaticMeshComponent* CollisionMesh = nullptr;
-	UPROPERTY(VisibleAnywhere)
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent* LaunchBlast = nullptr;
-	UPROPERTY(VisibleAnywhere)
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent* ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	URadialForceComponent* ExplosionForce = nullptr;
 
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 
