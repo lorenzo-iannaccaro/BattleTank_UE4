@@ -28,14 +28,14 @@ void ATankPlayerController::SetPawn(APawn* InPawn){
     Super::SetPawn(InPawn);
 
     auto PossessedTank = Cast<ATank>(InPawn);
-    if (!ensure(PossessedTank)) { return; }
+    if (!PossessedTank) { return; }
 
     // Subscribe our local method to the tank's death event
     PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossessedTankDeath);
 }
 
 void ATankPlayerController::AimTowardsReticle(){
-    if(!ensure(GetPawn())){
+    if(!GetPawn()){
         UE_LOG(LogTemp, Error, TEXT("No player tank pawn detected."));
         return;
     }
