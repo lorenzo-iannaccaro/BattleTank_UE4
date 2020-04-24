@@ -23,4 +23,9 @@ class BATTLETANK_API ATankAIController : public AAIController
 	private:
 		UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float DistanceFromPlayerTank = 7500.f;
+
+		virtual void SetPawn(APawn* InPawn) override;
+
+		UFUNCTION()
+		void OnPossessedTankDeath();
 };
