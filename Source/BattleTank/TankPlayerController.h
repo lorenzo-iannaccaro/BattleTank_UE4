@@ -25,6 +25,11 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 		UPROPERTY(EditDefaultsOnly)
 		float LineTraceRange = 1000000.0f;
 
+		virtual void SetPawn(APawn* InPawn) override;
+
+		UFUNCTION()
+		void OnPossessedTankDeath();
+
 	protected:
 		UFUNCTION(BlueprintImplementableEvent)
 		void FindAimingComponent(UTankAimingComponent* AimingComponentReference);

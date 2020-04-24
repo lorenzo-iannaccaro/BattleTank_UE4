@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
@@ -21,6 +22,16 @@ void ATankPlayerController::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
     AimTowardsReticle();
 
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn){
+    Super::SetPawn(InPawn);
+
+    auto PossessedTank = Cast<ATank>(InPawn);
+    if (!ensure(PossessedTank)) { return; }
+
+    // Subscribe our local method to the tank's death event
+    PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossessedTankDeath);
 }
 
 void ATankPlayerController::AimTowardsReticle(){
@@ -72,4 +83,9 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
     }
     HitLoc = FVector(0.0);
     return false;
+}
+
+void ATankPlayerController::OnPossessedTankDeath(){
+    UE_LOG(LogTemp, Warning, TEXT("Player Tank %s has died"), *GetPawn()->GetHumanReadableName());
+    StartSpectatingOnly();
 }
