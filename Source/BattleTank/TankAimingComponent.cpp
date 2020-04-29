@@ -42,7 +42,7 @@ int UTankAimingComponent::GetRoundsLeft() const{
 
 void UTankAimingComponent::AimAt(FVector& HitLocation){
 
-	if(!ensure(Barrel)){
+	if(!(Barrel)){
 		UE_LOG(LogTemp, Error, TEXT("Barrel not found."));
 		return;
 	}
@@ -72,7 +72,7 @@ void UTankAimingComponent::AimAt(FVector& HitLocation){
 }
 
 void UTankAimingComponent::InitialiseTurretAndBarrel(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet){
-	if(!ensure(TurretToSet && BarrelToSet)){
+	if(!(TurretToSet && BarrelToSet)){
 		return;
 	}
 
@@ -81,7 +81,7 @@ void UTankAimingComponent::InitialiseTurretAndBarrel(UTankTurret* TurretToSet, U
 }
 
 void UTankAimingComponent::MoveTurretAndBarrel(FVector AimDirection){
-	if(!ensure(Turret && Barrel)){
+	if(!(Turret && Barrel)){
 		return;
 	}
 
@@ -100,15 +100,15 @@ void UTankAimingComponent::MoveTurretAndBarrel(FVector AimDirection){
 }
 
 void UTankAimingComponent::Fire(){
-	if(!ensure(Barrel)){ return; }
+	if(!(Barrel)){ return; }
 
 	if(FiringState != EFiringState::Reloading && RoundsLeft > 0){
-		if(!ensure(ProjectileBlueprint)){ return; }
+		if(!(ProjectileBlueprint)){ return; }
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, 
 											Barrel->GetSocketLocation(FName("Projectile")), 
 											Barrel->GetSocketRotation(FName("Projectile")));
 
-		if(!ensure(Projectile)){ return; }
+		if(!(Projectile)){ return; }
 		Projectile->LaunchProjectile(LaunchSpeed);
 		FiringState = EFiringState::Reloading;
 		RoundsLeft--;

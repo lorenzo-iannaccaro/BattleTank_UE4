@@ -24,7 +24,7 @@ void ATankAIController::Tick(float DeltaTime)
     FVector PlayerHitLocation = PlayerTank->GetActorLocation();
 
     auto AimingComponent = AITank->FindComponentByClass<UTankAimingComponent>();
-    if(!ensure(AimingComponent)){return;}
+    if(!(AimingComponent)){return;}
     AimingComponent->AimAt(PlayerHitLocation);
 
     // AI firing

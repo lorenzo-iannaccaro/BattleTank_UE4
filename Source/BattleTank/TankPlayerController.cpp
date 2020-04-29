@@ -8,7 +8,7 @@ void ATankPlayerController::BeginPlay(){
     Super::BeginPlay();
 
     auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
-    if(!ensure(AimingComponent)){
+    if(!AimingComponent){
         UE_LOG(LogTemp, Error, TEXT("Aiming component not found"));
         return; 
     }
@@ -42,7 +42,7 @@ void ATankPlayerController::AimTowardsReticle(){
     FVector HitLocation;
     if(GetSightRayHitLocation(HitLocation)){
         auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
-        if(!ensure(AimingComponent)){ return; }
+        if(!AimingComponent){ return; }
         
         AimingComponent->AimAt(HitLocation);
     }
