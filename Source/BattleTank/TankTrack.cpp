@@ -15,7 +15,7 @@ TArray<ASprungWheel*> UTankTrack::GetWheels() const{
 	// Children is a out parameter
 	TArray<USceneComponent*> Children;
 	GetChildrenComponents(true, Children);
-	
+
 	for (USceneComponent* Child : Children)
 	{
 		auto SpawnPointChild = Cast<USpawnPoint>(Child);
@@ -45,7 +45,7 @@ void UTankTrack::DriveTrack(float CurrentThrottle){
 		SingleWheelForceIntensity = ForceToApply / WheelsArray.Num();
 	}
 	for(auto Wheel : WheelsArray){
-		Wheel->ApplyWheelForce(SingleWheelForceIntensity);
+		Wheel->UpdateWheelForceIntensity(SingleWheelForceIntensity);
 	}
 
 }

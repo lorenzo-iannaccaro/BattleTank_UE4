@@ -20,9 +20,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
-
-	void ApplyWheelForce(float Intensity);
+	void UpdateWheelForceIntensity(float Intensity);
 
 protected:
 	// Called when the game starts or when spawned
@@ -38,5 +36,12 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "My Components")
 	UPhysicsConstraintComponent* AxleWheelConstraint = nullptr;
 
+	float FrameForceIntensity = 0.0f;
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
+
 	void SetupConstraint();
+
+	void ApplyForce();
 };
