@@ -21,18 +21,13 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetThrottle(float Throttle);
+
+	// forward declaration can also be done this way
+	TArray<class ASprungWheel*> GetWheels() const;
 	
 private:
 	UTankTrack();
 
-	float CurrentThrottle = 0.0;
-
-	virtual void BeginPlay() override;
-
-	void DriveTrack();
-	void RemoveSlidingCounterforce();
-
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+	void DriveTrack(float CurrentThrottle);
 	
 };

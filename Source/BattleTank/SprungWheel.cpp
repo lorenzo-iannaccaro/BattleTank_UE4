@@ -49,3 +49,7 @@ void ASprungWheel::SetupConstraint(){
 	AxleWheelConstraint->SetConstrainedComponents(Axle, NAME_None, Wheel, NAME_None);
 }
 
+void ASprungWheel::ApplyWheelForce(float Intensity){
+	Wheel->AddForce(Axle->GetForwardVector() * Intensity);
+}
+
